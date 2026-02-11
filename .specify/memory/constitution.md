@@ -1,50 +1,49 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Todo API Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Simplicity First
+Every feature must justify its complexity. Prefer straightforward solutions over clever ones. Code should be readable by a developer unfamiliar with the project. No premature abstractions.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Type Safety
+All code must be fully typed using Python type hints. No `Any` types except when interfacing with untyped external libraries. Pydantic models for all data structures.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Test-Driven Development (NON-NEGOTIABLE)
+TDD is mandatory: Tests written first, tests must fail, then implement. Red-Green-Refactor cycle strictly enforced. No feature is complete without tests.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. RESTful Design
+API endpoints follow REST conventions. Resources are nouns, actions are HTTP verbs. Consistent response formats across all endpoints. Proper HTTP status codes.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Explicit Error Handling
+No silent failures. All errors must be logged and returned with meaningful messages. Use appropriate HTTP status codes. Validate all inputs at boundaries.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Technology Stack
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- **Language**: Python 3.11+
+- **Framework**: FastAPI
+- **Database**: SQLite (file-based, no external dependencies)
+- **Validation**: Pydantic v2
+- **Testing**: pytest with httpx for API tests
+- **Package Manager**: uv
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Code Standards
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+- Follow PEP 8 style guidelines, enforced by ruff
+- Maximum function length: 30 lines
+- Maximum file length: 300 lines
+- All public functions must have docstrings
+- No global mutable state
+- No `*` imports
+
+## Security Requirements
+
+- Input validation on all endpoints
+- No SQL injection vulnerabilities (use parameterized queries)
+- No sensitive data in logs
+- Proper error messages (no stack traces in production responses)
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other practices. All implementation decisions must align with these principles. Deviations require explicit justification and documentation.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-02-11
